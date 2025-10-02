@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TopBrandSuppliers — Premium African Products</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    /* Reset & Base */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: #333333; background: #ffffff; }
+
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+
+    /* Navbar */
+    .navbar { position: fixed; top:0; width:100%; background:rgba(255,255,255,0.98); padding:1.2rem 0;
+      display:flex; justify-content:center; z-index:1000; backdrop-filter: blur(20px); box-shadow: 0 2px 20px rgba(0,0,0,0.05); }
+    .nav-container { display:flex; justify-content:space-between; align-items:center; width:100%; max-width:1400px; padding: 0 2rem; }
+    .nav-logo { font-weight:800; font-size:1.5rem; color:#0078D4; display:flex; align-items:center; gap:.5rem; letter-spacing: -0.02em; }
+    .nav-menu { display:flex; list-style:none; gap:3rem; }
+    .nav-link { text-decoration:none; color:#333333; font-weight:400; position:relative; font-size: 0.95rem; transition: all 0.3s ease; }
+    .nav-link:hover { color:#0078D4; }
+    .nav-link::after { content:''; position:absolute; bottom:-8px; left:0; width:0; height:2px; background:#0078D4; transition:.3s; }
+    .nav-link:hover::after { width:100%; }
+    .hamburger { display:none; flex-direction:column; cursor:pointer; }
+    .bar { width:25px; height:3px; background:#333; margin:3px 0; }
+
+    /* Hero */
+    .hero { min-height:100vh; display:flex; align-items:center; background: linear-gradient(135deg, #f8fafe 0%, #ffffff 100%); padding-top:100px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%230078D4;stop-opacity:0.03" /><stop offset="100%" style="stop-color:%230078D4;stop-opacity:0.01" /></linearGradient></defs><rect width="1000" height="1000" fill="url(%23grad)"/></svg>'); }
+    .hero-container { display:grid; grid-template-columns:1fr; gap:3rem; text-align:center; width:100%; max-width: 1200px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+    .hero-title { font-size:4rem; font-weight:800; color:#1a1a1a; margin-bottom:1.5rem; line-height: 1.1; letter-spacing: -0.02em; }
+    .hero-description { color:#666666; margin-bottom:3rem; font-size: 1.25rem; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.5; }
+    .hero-buttons { display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap; }
+    .btn { padding:16px 32px; border-radius:6px; font-weight:600; cursor:pointer; text-decoration:none; transition: all 0.3s ease; font-size: 1rem; border: none; }
+    .btn-primary { background:#0078D4; color:#fff; }
+    .btn-primary:hover { background:#106ebe; box-shadow:0 8px 25px rgba(0,120,212,0.3); transform:translateY(-2px); }
+    .btn-secondary { border:2px solid #0078D4; color:#0078D4; background:transparent; }
+    .btn-secondary:hover { background:#0078D4; color:#fff; transform:translateY(-2px); }
+
+    /* Tabs */
+    .tabs { display:flex; justify-content:center; gap:1rem; margin:3rem 0; flex-wrap:wrap; }
+    .tab-btn { padding:12px 24px; border:2px solid #0078D4; border-radius:6px; background:#fff; color:#0078D4;
+      font-weight:600; cursor:pointer; transition: all 0.3s ease; font-family: 'Inter', sans-serif; }
+    .tab-btn.active, .tab-btn:hover { background:#0078D4; color:#fff; box-shadow: 0 4px 15px rgba(0,120,212,0.2); }
+    .tab-content { animation:fadeIn .5s ease-in-out; }
+    .tab-content.hidden { display:none; }
+    @keyframes fadeIn { from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
+
+    /* Product Grid */
+    .products-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:3rem; margin-top:3rem; }
+    .product-card { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 8px 40px rgba(0,0,0,0.06); transition: all 0.4s ease; border: 1px solid #f0f0f0; }
+    .product-card:hover { transform:translateY(-8px); box-shadow:0 20px 60px rgba(0,0,0,0.1); }
+    .product-image { height:280px; background:linear-gradient(135deg,#f8fafe,#e8f4fd); position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+    .product-image img { width:100%; height:100%; object-fit:cover; }
+    .product-image::before { content:''; position:absolute; top:0; left:0; right:0; bottom:0; background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="1" fill="%23666" opacity="0.1"/><circle cx="80" cy="40" r="0.8" fill="%23666" opacity="0.1"/><circle cx="40" cy="80" r="0.6" fill="%23666" opacity="0.1"/></svg>'); }
+    .product-placeholder { font-size:4.5rem; color:#0078D4; opacity:0.4; }
+    .product-info { padding:2rem; }
+    .product-title { color:#1a1a1a; font-weight:700; font-size:1.3rem; margin-bottom:.75rem; }
+    .product-variety { color:#0078D4; font-size:1rem; margin-bottom:1.5rem; font-weight: 500; }
+    .product-description { color:#666666; font-size:1rem; line-height:1.6; margin-bottom:1.5rem; }
+    .product-price { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; }
+    .price { font-size:1.4rem; font-weight:800; color:#0078D4; }
+    .original-price { font-size:1rem; color:#999; text-decoration:line-through; margin-left:.5rem; }
+    .add-to-cart { width:100%; padding:14px; background:#0078D4; color:#fff; border:none; border-radius:6px; font-weight:600; cursor:pointer; transition: all 0.3s ease; font-size: 1rem; }
+    .add-to-cart:hover { background:#106ebe; transform:translateY(-2px); box-shadow: 0 6px 20px rgba(0,120,212,0.3); }
+    .quantity-selector { display:flex; align-items:center; gap:.5rem; margin-bottom:1rem; }
+    .quantity-btn { width:30px; height:30px; border:1px solid #ddd; background:#fff; border-radius:5px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+    .quantity-btn:hover { background:#f5f5f5; }
+    .quantity-input { width:50px; text-align:center; border:1px solid #ddd; border-radius:5px; padding:5px; }
+
+    /* Shopping Cart */
+    .cart-icon { position:fixed; top:25px; right:25px; background:#0078D4; color:#fff; width:65px; height:65px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:1001; box-shadow:0 8px 30px rgba(0,120,212,0.3); transition: all 0.3s ease; }
+    .cart-icon:hover { transform:scale(1.1); }
+    .cart-count { position:absolute; top:-5px; right:-5px; background:#ff4757; color:#fff; border-radius:50%; width:25px; height:25px; display:flex; align-items:center; justify-content:center; font-size:.8rem; font-weight:600; }
+    .cart-sidebar { position:fixed; top:0; right:-400px; width:400px; height:100vh; background:#fff; box-shadow:-5px 0 20px rgba(0,0,0,0.1); z-index:1002; transition:.3s; overflow-y:auto; }
+    .cart-sidebar.open { right:0; }
+    .cart-header { padding:1.5rem; border-bottom:1px solid #eee; display:flex; justify-content:space-between; align-items:center; }
+    .cart-title { font-weight:600; color:#2c3e50; }
+    .close-cart { background:none; border:none; font-size:1.5rem; cursor:pointer; color:#666; }
+    .cart-items { padding:1rem; }
+    .cart-item { display:flex; gap:1rem; padding:1rem; border-bottom:1px solid #f5f5f5; }
+    .cart-item-image { width:60px; height:60px; background:#f8fafe; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#0078D4; }
+    .cart-item-info { flex:1; }
+    .cart-item-title { font-weight:600; color:#2c3e50; margin-bottom:.25rem; }
+    .cart-item-variety { font-size:.8rem; color:#666; margin-bottom:.5rem; }
+    .cart-item-price { color:#0078D4; font-weight:600; }
+    .cart-item-controls { display:flex; align-items:center; gap:.5rem; margin-top:.5rem; }
+    .remove-item { background:#ff4757; color:#fff; border:none; border-radius:4px; padding:2px 6px; font-size:.7rem; cursor:pointer; }
+    .cart-footer { position:absolute; bottom:0; left:0; right:0; padding:1.5rem; background:#fff; border-top:1px solid #eee; }
+    .cart-total { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; font-size:1.2rem; font-weight:600; }
+    .checkout-btn { width:100%; padding:14px; background:#0078D4; color:#fff; border:none; border-radius:6px; font-weight:600; cursor:pointer; transition: all 0.3s ease; font-size: 1rem; }
+    .checkout-btn:hover { background:#106ebe; box-shadow: 0 4px 15px rgba(0,120,212,0.3); }
+    .cart-overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); z-index:1001; opacity:0; visibility:hidden; transition:.3s; }
+    .cart-overlay.active { opacity:1; visibility:visible; }
+
+    /* Sections */
+    section { padding:120px 0; }
+    .section-header { text-align:center; margin-bottom:4rem; max-width: 800px; margin-left: auto; margin-right: auto; }
+    .section-title { font-size:3rem; font-weight:800; margin-bottom:1rem; color:#1a1a1a; line-height: 1.2; letter-spacing: -0.02em; }
+    .section-subtitle { color:#666666; font-size: 1.2rem; line-height: 1.5; }
+
+    /* About Section */
+    .about-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(350px,1fr)); gap:3rem; margin-top:4rem; }
+    .about-card { background:#fff; padding:3rem; border-radius:12px; box-shadow:0 8px 40px rgba(0,0,0,0.06); transition: all 0.4s ease; border: 1px solid #f0f0f0; }
+    .about-card:hover { transform:translateY(-8px); box-shadow:0 20px 60px rgba(0,0,0,0.1); }
+    .about-icon { font-size:3.5rem; color:#0078D4; margin-bottom:1.5rem; }
+    .about-card h3 { color:#1a1a1a; margin-bottom:1.5rem; font-weight:700; font-size: 1.4rem; }
+    .about-card p { color:#666666; line-height:1.7; font-size: 1rem; }
+
+    /* Success Stories */
+    .stories-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(400px,1fr)); gap:3rem; margin-top:4rem; }
+    .story-card { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 8px 40px rgba(0,0,0,0.06); transition: all 0.4s ease; border: 1px solid #f0f0f0; }
+    .story-card:hover { transform:translateY(-8px); box-shadow:0 20px 60px rgba(0,0,0,0.1); }
+    .story-image { height:240px; background:linear-gradient(135deg,#0078D4,#40E0D0); position:relative; overflow:hidden; }
+    .story-image::before { content:''; position:absolute; top:0; left:0; right:0; bottom:0; background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="white" opacity="0.3"/><circle cx="80" cy="40" r="1.5" fill="white" opacity="0.2"/><circle cx="40" cy="80" r="1" fill="white" opacity="0.4"/></svg>'); }
+    .story-content { padding:2rem; }
+    .story-title { color:#1a1a1a; font-weight:700; margin-bottom:.75rem; font-size: 1.3rem; }
+    .story-location { color:#0078D4; font-size:1rem; margin-bottom:1.5rem; font-weight: 500; }
+    .story-text { color:#666666; line-height:1.7; margin-bottom:1.5rem; font-size: 1rem; }
+    .story-impact { background:#f8fafe; padding:1.5rem; border-radius:8px; border-left:4px solid #0078D4; }
+    .story-impact strong { color:#0078D4; }
+
+    /* Certification */
+    .cert-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:3rem; margin-top:4rem; }
+    .cert-card { background:#fff; padding:2.5rem; border-radius:12px; box-shadow:0 8px 40px rgba(0,0,0,0.06); text-align:center; transition: all 0.4s ease; border: 1px solid #f0f0f0; }
+    .cert-card:hover { transform:translateY(-8px); box-shadow:0 20px 60px rgba(0,0,0,0.1); }
+    .cert-badge { width:90px; height:90px; background:linear-gradient(135deg,#0078D4,#40E0D0); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 1.5rem; }
+    .cert-badge i { font-size:2.2rem; color:#fff; }
+    .cert-title { color:#1a1a1a; font-weight:700; margin-bottom:1rem; font-size: 1.2rem; }
+    .cert-description { color:#666666; font-size:1rem; line-height:1.6; }
+
+    /* Stats Section */
+    .stats-section { background:linear-gradient(135deg,#0078D4,#40E0D0); color:#fff; position: relative; overflow: hidden; }
+    .stats-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><circle cx="200" cy="200" r="3" fill="white" opacity="0.1"/><circle cx="800" cy="400" r="2" fill="white" opacity="0.1"/><circle cx="400" cy="800" r="1.5" fill="white" opacity="0.1"/></svg>'); }
+    .stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:3rem; position: relative; z-index: 1; }
+    .stat-item { text-align:center; }
+    .stat-number { font-size:4rem; font-weight:800; margin-bottom:1rem; }
+    .stat-label { font-size:1.2rem; opacity:.95; font-weight: 500; }
+
+    /* Footer */
+    .footer { background:#1a1a1a; color:#fff; text-align:center; padding:3rem 2rem; margin-top:0; }
+    .footer a { color:#a0c4ff; text-decoration:none; margin:0 1rem; font-weight: 500; transition: all 0.3s ease; }
+    .footer a:hover { color:#fff; }
+
+    /* Responsive */
+    @media(max-width:768px) {
+      .nav-menu { position:fixed; left:-100%; top:80px; flex-direction:column; background:#fff; width:100%; text-align:center;
+        transition:.3s; padding:2rem 0; box-shadow:0 10px 27px rgba(0,0,0,.05); }
+      .nav-menu.active { left:0; }
+      .hamburger { display:flex; }
+      .hero-title { font-size:2.5rem; }
+      .section-title { font-size:2.2rem; }
+      .cart-sidebar { width:100%; right:-100%; }
+      .cart-sidebar.open { right:0; }
+      .products-grid { grid-template-columns:1fr; }
+      .cart-icon { top:20px; right:20px; width:55px; height:55px; }
+      .about-grid, .stories-grid, .cert-grid { grid-template-columns:1fr; }
+      section { padding:80px 0; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">TopBrandSuppliers</div>
+      <ul class="nav-menu">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#products" class="nav-link">Products</a></li>
+        <li><a href="#success-stories" class="nav-link">Success Stories</a></li>
+        <li><a href="#certification" class="nav-link">Certification</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="hamburger"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <div class="hero-container">
+      <div class="hero-content">
+        <h1 class="hero-title">Sustainable brands that work</h1>
+        <p class="hero-description">We're building a world where sustainable living is commonplace, desirable and rewarding. Where the brands people love are a force for good.</p>
+        <div class="hero-buttons">
+          <a href="#products" class="btn btn-primary">Explore Products</a>
+          <a href="#purpose" class="btn btn-secondary">Our Purpose</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Tabs -->
+  <section id="products">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Our Products</h2>
+        <p class="section-subtitle">Explore our diverse natural product lines</p>
+      </div>
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="honey">Bee MyLyf (Honey)</button>
+        <button class="tab-btn" data-tab="cashew">CashewNuts</button>
+        <button class="tab-btn" data-tab="clove">Clove</button>
+      </div>
+      <div class="tab-content" id="honey">
+        <div class="section-header">
+          <h3>Bee MyLyf – Premium Honey Collection</h3>
+          <p>Premium African honey with full traceability, crafted for wellness and nutrition</p>
+        </div>
+        <div class="products-grid">
+          <div class="product-card">
+            <div class="product-image">
+              <div class="product-placeholder"><i class="fas fa-honey-pot"></i></div>
+            </div>
+            <div class="product-info">
+              <h4 class="product-title">Acacia Light Honey</h4>
+              <p class="product-variety">Premium Grade • 500g</p>
+              <p class="product-description">Delicate, light-colored honey with a mild floral taste. Perfect for tea, breakfast, or baking.</p>
+              <div class="product-price">
+                <span class="price">$24.99</span>
+                <span class="original-price">$29.99</span>
+              </div>
+              <div class="quantity-selector">
+                <button class="quantity-btn" onclick="changeQuantity(this, -1)">-</button>
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="quantity-btn" onclick="changeQuantity(this, 1)">+</button>
+              </div>
+              <button class="add-to-cart" onclick="addToCart('Acacia Light Honey', '500g', 24.99, this)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <div class="product-placeholder"><i class="fas fa-honey-pot"></i></div>
+            </div>
+            <div class="product-info">
+              <h4 class="product-title">Forest Harvest Honey</h4>
+              <p class="product-variety">Wild Collection • 500g</p>
+              <p class="product-description">Bold amber honey with rich, complex flavors from wildflower meadows and forest blooms.</p>
+              <div class="product-price">
+                <span class="price">$32.99</span>
+              </div>
+              <div class="quantity-selector">
+                <button class="quantity-btn" onclick="changeQuantity(this, -1)">-</button>
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="quantity-btn" onclick="changeQuantity(this, 1)">+</button>
+              </div>
+              <button class="add-to-cart" onclick="addToCart('Forest Harvest Honey', '500g', 32.99, this)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <div class="product-placeholder"><i class="fas fa-honey-pot"></i></div>
+            </div>
+            <div class="product-info">
+              <h4 class="product-title">Raw Wellness Honey</h4>
+              <p class="product-variety">Unfiltered • 750g</p>
+              <p class="product-description">Minimally processed raw honey with natural enzymes and pollen. Maximum health benefits preserved.</p>
+              <div class="product-price">
+                <span class="price">$39.99</span>
+              </div>
+              <div class="quantity-selector">
+                <button class="quantity-btn" onclick="changeQuantity(this, -1)">-</button>
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="quantity-btn" onclick="changeQuantity(this, 1)">+</button>
+              </div>
+              <button class="add-to-cart" onclick="addToCart('Raw Wellness Honey', '750g', 39.99, this)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <div class="product-placeholder"><i class="fas fa-honey-pot"></i></div>
+            </div>
+            <div class="product-info">
+              <h4 class="product-title">Spice Grove Honey</h4>
+              <p class="product-variety">Infused Blend • 400g</p>
+              <p class="product-description">Artisanal honey infused with traditional African spices. Unique flavor profile for gourmet cooking.</p>
+              <div class="product-price">
+                <span class="price">$28.99</span>
+              </div>
+              <div class="quantity-selector">
+                <button class="quantity-btn" onclick="changeQuantity(this, -1)">-</button>
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="quantity-btn" onclick="changeQuantity(this, 1)">+</button>
+              </div>
+              <button class="add-to-cart" onclick="addToCart('Spice Grove Honey', '400g', 28.99, this)">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-content hidden" id="cashew">
+        <div class="section-header">
+          <h3>Premium Cashew Collection</h3>
+          <p>Hand-picked cashews from sustainable farms, perfect for snacks and cooking</p>
+        </div>
+        <div class="products-grid">
+          <div class="product-card">
+            <div class="product-image">
+              <div class="product-placeholder"><i class="fas fa-seedling"></i></div>
+            </div>
+            <div class="product-info">
+              <h4 class="product-title">Roasted & Salted Cashews</h4>
+              <p class="product-variety">Premium Grade • 250g</p>
+              <p class="product-description">Perfectly roasted cashews with a light touch of sea salt. Ideal for snacking or entertaining.</p>
+              <div class="product-price">
+                <span class="price">$18.99</span>
+                <span class="original-price">$22.99</span>
+              </div>
+              <div class="quantity-selector">
+                <button class="quantity-btn" onclick="changeQuantity(this, -1)">-</button>
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="quantity-btn" onclick="changeQuantity(this, 1)">+</button>
+              </div>
+              <button class="add-to-cart" onclick="addToCart('Roasted & Salted Cashews', '250g', 18.99, this)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <div class="product-placeholder"><i class="fas fa-seedling"></i></div>
+            </div>
+            <div class="product-info">
+              <h4 class="product-title">Organic Raw Cashews</h4>
+              <p class="product-variety">Certified Organic • 500g</p>
+              <p class="product-description">Unprocessed organic cashews, perfect for raw recipes, cashew milk, or healthy snacking.</p>
+              <div class="product-price">
+                <span class="price">$26.99</span>
+              </div>
+              <div class="quantity-selector">
+                <button class="quantity-btn" onclick="changeQuantity(this, -1)">-</button>
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="quantity-btn" onclick="changeQuantity(this, 1)">+</button>
+              </div>
+              <button class="add-to-cart" onclick="addToCart('Organic Raw Cashews', '500g', 26.99, this)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <div class="product-placeholder"><i class="fas fa-jar"></i></div>
+            </div>
+            <div class="product-info">
+              <h4 class="product-title">Cashew Butter</h4>
+              <p class="product-variety">Smooth & Creamy • 350g</p>
+              <p class="product-description">Rich, creamy cashew butter made from premium nuts. No additives, just pure cashew goodness.</p>
+              <div class="product-price">
+                <span class="price">$22.99</span>
+              </div>
+              <div class="quantity-selector">
+                <button class="quantity-btn" onclick="changeQuantity(this, -1)">-</button>
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="quantity-btn" onclick="changeQuantity(this, 1)">+</button>
+              </div>
+              <button class="add-to-cart" onclick="addToCart('Cashew Butter', '350g', 22.99, this)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <div class="product-placeholder"><i class="fas fa-seedling"></i></div>
+            </div>
+            <div class="product-info">
+              <h4 class="product-title">Honey Glazed Cashews</h4>
+              <p class="product-variety">Gourmet • 200g</p>
+              <p class="product-description">Premium cashews glazed with our signature honey blend. Perfect luxury snack or gift.</p>
+              <div class="product-price">
+                <span class="price">$24.99</span>
+              </div>
+              <div class="quantity-selector">
+                <button class="quantity-btn" onclick="changeQuantity(this, -1)">-</button>
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="quantity-btn" onclick="changeQuantity(this, 1)">+</button>
+              </div>
+              <button class="add-to-cart" onclick="addToCart('Honey Glazed Cashews', '200g', 24.99, this)">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-content hidden" id="clove">
+        <div class="section-header">
+          <h3>Premium Clove Collection</h3>
+          <p>Premium cloves sourced from coastal farms, rich in aroma and natural benefits</p>
+        </div>
+        <div class="products-grid">
+          <div class="product-card">
+            <div class="product-image">
+              <div class="product-placeholder"><i class="fas fa-pepper-hot"></i></div>
+            </div>
+            <div class="product-info">
+              <h4 class="product-title">Whole Cloves</h4>
+              <p class="product-variety">Premium Grade • 100g</p>
+              <p class="product-description">Aromatic whole cloves perfect for cooking, baking, and traditional remedies. Intense flavor and fragrance.</p>
+              <div class="product-price">
+                <span class="price">$12.99</span>
+              </div>
+              <div class="quantity-selector">
+                <button class="quantity-btn" onclick="changeQuantity(this, -1)">-</button>
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="quantity-btn" onclick="changeQuantity(this, 1)">+</button>
+              </div>
+              <button class="add-to-cart" onclick="addToCart('Whole Cloves', '100g', 12.99, this)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <div class="product-placeholder"><i class="fas fa-mortar-pestle"></i></div>
+            </div>
+            <div class="product-info">
+              <h4 class="product-title">Ground Clove Powder</h4>
+              <p class="product-variety">Fine Ground • 75g</p>
+              <p class="product-description">Finely ground clove powder for easy use in recipes. Maintains full potency and aromatic properties.</p>
+              <div class="product-price">
+                <span class="price">$9.99</span>
+              </div>
+              <div class="quantity-selector">
+                <button class="quantity-btn" onclick="changeQuantity(this, -1)">-</button>
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="quantity-btn" onclick="changeQuantity(this, 1)">+</button>
+              </div>
+              <button class="add-to-cart" onclick="addToCart('Ground Clove Powder', '75g', 9.99, this)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <div class="product-placeholder"><i class="fas fa-tint"></i></div>
+            </div>
+            <div class="product-info">
+              <h4 class="product-title">Clove Oil Extract</h4>
+              <p class="product-variety">Pure Essential Oil • 30ml</p>
+              <p class="product-description">Pure clove essential oil extracted through steam distillation. Perfect for aromatherapy and natural remedies.</p>
+              <div class="product-price">
+                <span class="price">$34.99</span>
+              </div>
+              <div class="quantity-selector">
+                <button class="quantity-btn" onclick="changeQuantity(this, -1)">-</button>
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="quantity-btn" onclick="changeQuantity(this, 1)">+</button>
+              </div>
+              <button class="add-to-cart" onclick="addToCart('Clove Oil Extract', '30ml', 34.99, this)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-image">
+              <div class="product-placeholder"><i class="fas fa-leaf"></i></div>
+            </div>
+            <div class="product-info">
+              <h4 class="product-title">Clove Tea Blend</h4>
+              <p class="product-variety">Herbal Blend • 50g</p>
+              <p class="product-description">Traditional herbal tea blend with cloves and complementary spices. Warming and aromatic.</p>
+              <div class="product-price">
+                <span class="price">$16.99</span>
+              </div>
+              <div class="quantity-selector">
+                <button class="quantity-btn" onclick="changeQuantity(this, -1)">-</button>
+                <input type="number" class="quantity-input" value="1" min="1">
+                <button class="quantity-btn" onclick="changeQuantity(this, 1)">+</button>
+              </div>
+              <button class="add-to-cart" onclick="addToCart('Clove Tea Blend', '50g', 16.99, this)">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shopping Cart -->
+  <div class="cart-icon" onclick="toggleCart()">
+    <i class="fas fa-shopping-cart"></i>
+    <span class="cart-count" id="cartCount">0</span>
+  </div>
+
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3 class="cart-title">Shopping Cart</h3>
+      <button class="close-cart" onclick="toggleCart()">&times;</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <p style="text-align:center; color:#666; padding:2rem;">Your cart is empty</p>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total: <span id="cartTotal">$0.00</span></span>
+      </div>
+      <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">About TopBrandSuppliers</h2>
+        <p class="section-subtitle">Connecting African excellence with global markets</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="about-icon"><i class="fas fa-globe-africa"></i></div>
+          <h3>Our Mission</h3>
+          <p>To bridge the gap between premium African agricultural products and global markets, ensuring fair trade practices that benefit both suppliers and consumers while preserving traditional farming methods.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-icon"><i class="fas fa-handshake"></i></div>
+          <h3>Our Values</h3>
+          <p>We believe in transparency, sustainability, and community empowerment. Every product we source creates positive impact in local communities while delivering exceptional quality to our customers.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-icon"><i class="fas fa-leaf"></i></div>
+          <h3>Sustainability</h3>
+          <p>Our commitment to environmental stewardship drives us to work exclusively with suppliers who practice sustainable farming, ensuring the preservation of Africa's natural resources for future generations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">Community Suppliers</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">25</div>
+          <div class="stat-label">African Countries</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">50K+</div>
+          <div class="stat-label">Families Supported</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">99%</div>
+          <div class="stat-label">Customer Satisfaction</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success Stories -->
+  <section id="success-stories">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Success Stories</h2>
+        <p class="section-subtitle">Transforming communities through sustainable partnerships</p>
+      </div>
+      <div class="stories-grid">
+        <div class="story-card">
+          <div class="story-image"></div>
+          <div class="story-content">
+            <h3 class="story-title">Amara Honey Cooperative</h3>
+            <p class="story-location"><i class="fas fa-map-marker-alt"></i> Northern Ghana</p>
+            <p class="story-text">What started as a small group of 12 beekeepers has grown into a thriving cooperative of 150 members. Through our partnership, they've increased their income by 300% and built a modern processing facility.</p>
+            <div class="story-impact">
+              <strong>Impact:</strong> 150 families lifted out of poverty, 500 hectares of forest preserved through sustainable beekeeping practices.
+            </div>
+          </div>
+        </div>
+        <div class="story-card">
+          <div class="story-image"></div>
+          <div class="story-content">
+            <h3 class="story-title">Cashew Farmers Alliance</h3>
+            <p class="story-location"><i class="fas fa-map-marker-alt"></i> Ivory Coast</p>
+            <p class="story-text">Our partnership with local cashew farmers has revolutionized their operations. We provided training, equipment, and guaranteed purchase agreements, transforming their livelihoods.</p>
+            <div class="story-impact">
+              <strong>Impact:</strong> 200% increase in farmer income, 80 new jobs created, organic certification achieved for 1,000 hectares.
+            </div>
+          </div>
+        </div>
+        <div class="story-card">
+          <div class="story-image"></div>
+          <div class="story-content">
+            <h3 class="story-title">Spice Growers Collective</h3>
+            <p class="story-location"><i class="fas fa-map-marker-alt"></i> Zanzibar, Tanzania</p>
+            <p class="story-text">Traditional clove and spice farmers now have direct access to international markets. Our quality standards and fair pricing have enabled them to invest in better farming techniques and community development.</p>
+            <div class="story-impact">
+              <strong>Impact:</strong> 3 schools built, 250 children educated, sustainable farming practices adopted across 2,000 hectares.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certification Section -->
+  <section id="certification">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Our Certifications</h2>
+        <p class="section-subtitle">Quality and sustainability you can trust</p>
+      </div>
+      <div class="cert-grid">
+        <div class="cert-card">
+          <div class="cert-badge">
+            <i class="fas fa-certificate"></i>
+          </div>
+          <h3 class="cert-title">Organic Certified</h3>
+          <p class="cert-description">All our products meet strict organic standards, ensuring no harmful chemicals or pesticides are used in production.</p>
+        </div>
+        <div class="cert-card">
+          <div class="cert-badge">
+            <i class="fas fa-balance-scale"></i>
+          </div>
+          <h3 class="cert-title">Fair Trade</h3>
+          <p class="cert-description">We guarantee fair prices to farmers and invest in community development projects that create lasting positive impact.</p>
+        </div>
+        <div class="cert-card">
+          <div class="cert-badge">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3 class="cert-title">ISO 22000</h3>
+          <p class="cert-description">Our food safety management system ensures the highest standards from farm to table, protecting consumers and maintaining quality.</p>
+        </div>
+        <div class="cert-card">
+          <div class="cert-badge">
+            <i class="fas fa-leaf"></i>
+          </div>
+          <h3 class="cert-title">Rainforest Alliance</h3>
+          <p class="cert-description">Committed to protecting biodiversity and supporting sustainable livelihoods in farming communities across Africa.</p>
+        </div>
+        <div class="cert-card">
+          <div class="cert-badge">
+            <i class="fas fa-globe"></i>
+          </div>
+          <h3 class="cert-title">Global GAP</h3>
+          <p class="cert-description">Good Agricultural Practices certification ensures our products meet international standards for food safety and sustainability.</p>
+        </div>
+        <div class="cert-card">
+          <div class="cert-badge">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <h3 class="cert-title">HACCP</h3>
+          <p class="cert-description">Hazard Analysis Critical Control Points system guarantees food safety through systematic preventive approach to food safety.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 TopBrandSuppliers. All rights reserved.</p>
+    <p>
+      <a href="#about">About</a> | 
+      <a href="#products">Products</a> | 
+      <a href="#success-stories">Success Stories</a> | 
+      <a href="#certification">Certification</a> | 
+      <a href="#contact">Contact</a>
+    </p>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^=\"#\"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // Tabs
+    document.querySelectorAll('.tab-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const tabId = button.getAttribute('data-tab');
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.add('hidden'));
+        document.getElementById(tabId).classList.remove('hidden');
+      });
+    });
+
+    // Shopping Cart Functionality
+    let cart = [];
+    let cartTotal = 0;
+
+    function toggleCart() {
+      const sidebar = document.getElementById('cartSidebar');
+      const overlay = document.getElementById('cartOverlay');
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('active');
+    }
+
+    function changeQuantity(button, change) {
+      const input = button.parentNode.querySelector('.quantity-input');
+      let value = parseInt(input.value) + change;
+      if (value < 1) value = 1;
+      input.value = value;
+    }
+
+    function addToCart(name, variety, price, button) {
+      const quantityInput = button.parentNode.querySelector('.quantity-input');
+      const quantity = parseInt(quantityInput.value);
+      
+      const existingItem = cart.find(item => item.name === name && item.variety === variety);
+      
+      if (existingItem) {
+        existingItem.quantity += quantity;
+      } else {
+        cart.push({
+          name: name,
+          variety: variety,
+          price: price,
+          quantity: quantity
+        });
+      }
+      
+      updateCartDisplay();
+      quantityInput.value = 1;
+      
+      // Show success feedback
+      const originalText = button.textContent;
+      button.textContent = 'Added!';
+      button.style.background = '#27ae60';
+      setTimeout(() => {
+        button.textContent = originalText;
+        button.style.background = '#0045ff';
+      }, 1000);
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCartDisplay();
+    }
+
+    function updateCartQuantity(index, newQuantity) {
+      if (newQuantity < 1) {
+        removeFromCart(index);
+      } else {
+        cart[index].quantity = newQuantity;
+        updateCartDisplay();
+      }
+    }
+
+    function updateCartDisplay() {
+      const cartItems = document.getElementById('cartItems');
+      const cartCount = document.getElementById('cartCount');
+      const cartTotalElement = document.getElementById('cartTotal');
+      
+      if (cart.length === 0) {
+        cartItems.innerHTML = '<p style="text-align:center; color:#666; padding:2rem;">Your cart is empty</p>';
+        cartCount.textContent = '0';
+        cartTotalElement.textContent = '$0.00';
+        return;
+      }
+      
+      let totalItems = 0;
+      cartTotal = 0;
+      
+      cartItems.innerHTML = cart.map((item, index) => {
+        totalItems += item.quantity;
+        cartTotal += item.price * item.quantity;
+        
+        return `
+          <div class="cart-item">
+            <div class="cart-item-image">
+              <i class="fas fa-${getProductIcon(item.name)}"></i>
+            </div>
+            <div class="cart-item-info">
+              <div class="cart-item-title">${item.name}</div>
+              <div class="cart-item-variety">${item.variety}</div>
+              <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+              <div class="cart-item-controls">
+                <button class="quantity-btn" onclick="updateCartQuantity(${index}, ${item.quantity - 1})">-</button>
+                <span style="margin:0 10px;">${item.quantity}</span>
+                <button class="quantity-btn" onclick="updateCartQuantity(${index}, ${item.quantity + 1})">+</button>
+                <button class="remove-item" onclick="removeFromCart(${index})">Remove</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+      
+      cartCount.textContent = totalItems;
+      cartTotalElement.textContent = `$${cartTotal.toFixed(2)}`;
+    }
+
+    function getProductIcon(productName) {
+      if (productName.includes('Honey')) return 'honey-pot';
+      if (productName.includes('Cashew')) return 'seedling';
+      if (productName.includes('Clove')) return 'pepper-hot';
+      if (productName.includes('Oil')) return 'tint';
+      if (productName.includes('Tea')) return 'leaf';
+      if (productName.includes('Butter')) return 'jar';
+      return 'shopping-bag';
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+      }
+      
+      alert(`Thank you for your order!\n\nTotal: $${cartTotal.toFixed(2)}\nItems: ${cart.length}\n\nWe'll process your order and send you a confirmation email.`);
+      
+      // Clear cart after checkout
+      cart = [];
+      updateCartDisplay();
+      toggleCart();
+    }
+  </script>
+</body>
+</html>

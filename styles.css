@@ -1,0 +1,38 @@
+/* Tabs */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.tab-btn {
+  padding: 10px 20px;
+  border: 2px solid #0045ff;
+  border-radius: 30px;
+  background: white;
+  color: #0045ff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab-btn.active,
+.tab-btn:hover {
+  background: #0045ff;
+  color: white;
+}
+
+.tab-content {
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.tab-content.hidden {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
