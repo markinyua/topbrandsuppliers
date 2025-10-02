@@ -10,7 +10,50 @@
   <style>
     /* Reset & Base */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: #333333; background: #ffffff; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: #333333; background: #ffffff; position: relative; }
+    
+    /* Dynamic Background System */
+    .dynamic-background { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; transition: all 1s ease-in-out; }
+    .bg-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.75); z-index: 1; }
+    
+    /* Background Images */
+    .bg-home { background: linear-gradient(135deg, rgba(0,120,212,0.1) 0%, rgba(64,224,208,0.1) 100%), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="%230078D4" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="1000" height="1000" fill="url(%23grid)"/><circle cx="200" cy="200" r="100" fill="%230078D4" opacity="0.05"/><circle cx="800" cy="400" r="80" fill="%2340E0D0" opacity="0.05"/><circle cx="400" cy="800" r="60" fill="%230078D4" opacity="0.05"/></svg>'); background-size: cover; background-position: center; }
+    
+    .bg-about { background: linear-gradient(135deg, rgba(0,120,212,0.1) 0%, rgba(64,224,208,0.1) 100%), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="globe" cx="50%" cy="50%" r="50%"><stop offset="0%" style="stop-color:%230078D4;stop-opacity:0.1" /><stop offset="100%" style="stop-color:%230078D4;stop-opacity:0.02" /></radialGradient></defs><rect width="1000" height="1000" fill="url(%23globe)"/><path d="M200,300 Q500,200 800,300 Q500,400 200,300" fill="%2340E0D0" opacity="0.08"/><path d="M200,500 Q500,400 800,500 Q500,600 200,500" fill="%230078D4" opacity="0.06"/><path d="M200,700 Q500,600 800,700 Q500,800 200,700" fill="%2340E0D0" opacity="0.04"/></svg>'); background-size: cover; background-position: center; }
+    
+    .bg-honey { 
+      background: linear-gradient(135deg, rgba(255,193,7,0.3) 0%, rgba(255,235,59,0.2) 100%), 
+                  linear-gradient(45deg, rgba(0,0,0,0.1) 0%, transparent 50%), 
+                  url('https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=1200&auto=format&fit=crop&q=80') center/cover,
+                  url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&auto=format&fit=crop&q=80') center/cover;
+      background-blend-mode: multiply, normal, normal, normal;
+      background-position: center, center, top left, bottom right;
+      background-size: cover, cover, 60%, 40%;
+    }
+    
+    .bg-cashew { 
+      background: linear-gradient(135deg, rgba(139,69,19,0.4) 0%, rgba(160,82,45,0.3) 100%), 
+                  linear-gradient(45deg, rgba(0,0,0,0.15) 0%, transparent 70%), 
+                  url('https://images.unsplash.com/photo-1509358271058-acd22cc93898?w=1200&auto=format&fit=crop&q=80') center/cover,
+                  url('https://images.unsplash.com/photo-1585059895403-342b1bb6f07e?w=1200&auto=format&fit=crop&q=80') center/cover;
+      background-blend-mode: multiply, normal, normal, normal;
+      background-position: center, center, top right, bottom left;
+      background-size: cover, cover, 70%, 50%;
+    }
+    
+    .bg-clove { 
+      background: linear-gradient(135deg, rgba(139,0,0,0.4) 0%, rgba(165,42,42,0.3) 100%), 
+                  linear-gradient(45deg, rgba(0,0,0,0.2) 0%, transparent 60%), 
+                  url('https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=1200&auto=format&fit=crop&q=80') center/cover,
+                  url('https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=1200&auto=format&fit=crop&q=80') center/cover;
+      background-blend-mode: multiply, normal, normal, normal;
+      background-position: center, center, center, bottom right;
+      background-size: cover, cover, 80%, 60%;
+    }
+    
+    .bg-success { background: linear-gradient(135deg, rgba(34,139,34,0.1) 0%, rgba(50,205,50,0.08) 100%), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="leaves" width="120" height="120" patternUnits="userSpaceOnUse"><path d="M60,20 Q80,40 60,80 Q40,40 60,20" fill="%23228B22" opacity="0.08"/><path d="M20,60 Q40,80 80,60 Q40,40 20,60" fill="%2332CD32" opacity="0.06"/></pattern></defs><rect width="1000" height="1000" fill="url(%23leaves)"/><path d="M0,800 Q200,700 400,800 Q600,900 800,800 Q900,750 1000,800" stroke="%23228B22" stroke-width="4" fill="none" opacity="0.1"/></svg>'); background-size: cover; background-position: center; }
+    
+    .bg-certification { background: linear-gradient(135deg, rgba(0,120,212,0.1) 0%, rgba(64,224,208,0.1) 100%), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="certificates" width="150" height="150" patternUnits="userSpaceOnUse"><rect x="25" y="25" width="100" height="100" fill="none" stroke="%230078D4" stroke-width="2" opacity="0.1" rx="10"/><circle cx="75" cy="75" r="20" fill="%2340E0D0" opacity="0.08"/><path d="M65,75 L70,80 L85,65" stroke="%230078D4" stroke-width="3" fill="none" opacity="0.15"/></pattern></defs><rect width="1000" height="1000" fill="url(%23certificates)"/></svg>'); background-size: cover; background-position: center; }
 
     .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
 
@@ -28,8 +71,7 @@
     .bar { width:25px; height:3px; background:#333; margin:3px 0; }
 
     /* Hero */
-    .hero { min-height:100vh; display:flex; align-items:center; background: linear-gradient(135deg, #f8fafe 0%, #ffffff 100%); padding-top:100px; position: relative; overflow: hidden; }
-    .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%230078D4;stop-opacity:0.03" /><stop offset="100%" style="stop-color:%230078D4;stop-opacity:0.01" /></linearGradient></defs><rect width="1000" height="1000" fill="url(%23grad)"/></svg>'); }
+    .hero { min-height:100vh; display:flex; align-items:center; padding-top:100px; position: relative; z-index: 2; }
     .hero-container { display:grid; grid-template-columns:1fr; gap:3rem; text-align:center; width:100%; max-width: 1200px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
     .hero-title { font-size:4rem; font-weight:800; color:#1a1a1a; margin-bottom:1.5rem; line-height: 1.1; letter-spacing: -0.02em; }
     .hero-description { color:#666666; margin-bottom:3rem; font-size: 1.25rem; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.5; }
@@ -97,7 +139,7 @@
     .cart-overlay.active { opacity:1; visibility:visible; }
 
     /* Sections */
-    section { padding:120px 0; }
+    section { padding:120px 0; position: relative; z-index: 2; }
     .section-header { text-align:center; margin-bottom:4rem; max-width: 800px; margin-left: auto; margin-right: auto; }
     .section-title { font-size:3rem; font-weight:800; margin-bottom:1rem; color:#1a1a1a; line-height: 1.2; letter-spacing: -0.02em; }
     .section-subtitle { color:#666666; font-size: 1.2rem; line-height: 1.5; }
@@ -148,7 +190,7 @@
     /* Responsive */
     @media(max-width:768px) {
       .nav-menu { position:fixed; left:-100%; top:80px; flex-direction:column; background:#fff; width:100%; text-align:center;
-        transition:.3s; padding:2rem 0; box-shadow:0 10px 27px rgba(0,0,0,.05); }
+        transition:.3s; padding:2rem 0; box-shadow:0 10px 27px rgba(0,0,0,.05); z-index: 1003; }
       .nav-menu.active { left:0; }
       .hamburger { display:flex; }
       .hero-title { font-size:2.5rem; }
@@ -159,10 +201,15 @@
       .cart-icon { top:20px; right:20px; width:55px; height:55px; }
       .about-grid, .stories-grid, .cert-grid { grid-template-columns:1fr; }
       section { padding:80px 0; }
+      .bg-overlay { background: rgba(255, 255, 255, 0.9); }
     }
   </style>
-</head>
+  </head>
 <body>
+  <!-- Dynamic Background -->
+  <div class="dynamic-background bg-home" id="dynamicBg">
+    <div class="bg-overlay"></div>
+  </div>
   <!-- Navbar -->
   <nav class="navbar">
     <div class="nav-container">
@@ -673,8 +720,71 @@
         button.classList.add('active');
         document.querySelectorAll('.tab-content').forEach(content => content.classList.add('hidden'));
         document.getElementById(tabId).classList.remove('hidden');
+        
+        // Update background based on selected tab
+        updateTabBackground(tabId);
       });
     });
+
+    // Dynamic Background System
+    const backgrounds = {
+      'home': 'bg-home',
+      'about': 'bg-about', 
+      'products': 'bg-honey', // Default to honey
+      'honey': 'bg-honey',
+      'cashew': 'bg-cashew',
+      'clove': 'bg-clove',
+      'success-stories': 'bg-success',
+      'certification': 'bg-certification'
+    };
+
+    let currentBackground = 'bg-home';
+    const dynamicBg = document.getElementById('dynamicBg');
+
+    function updateBackground(newBg) {
+      if (newBg !== currentBackground) {
+        dynamicBg.className = `dynamic-background ${newBg}`;
+        currentBackground = newBg;
+      }
+    }
+
+    function handleScroll() {
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      
+      // Get all sections
+      const sections = document.querySelectorAll('section');
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - windowHeight / 2;
+        const sectionBottom = sectionTop + section.offsetHeight;
+        
+        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+          const sectionId = section.id;
+          if (backgrounds[sectionId]) {
+            updateBackground(backgrounds[sectionId]);
+          }
+        }
+      });
+      
+      // Handle hero section
+      if (scrollPosition < windowHeight / 2) {
+        updateBackground(backgrounds['home']);
+      }
+    }
+
+    // Tab-specific background changes
+    function updateTabBackground(tabId) {
+      if (backgrounds[tabId]) {
+        updateBackground(backgrounds[tabId]);
+      }
+    }
+
+    // Scroll event listener
+    window.addEventListener('scroll', handleScroll);
+    
+    // Initial background set
+    handleScroll();
 
     // Shopping Cart Functionality
     let cart = [];
