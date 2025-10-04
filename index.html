@@ -54,6 +54,8 @@
     .bg-success { background: linear-gradient(135deg, rgba(34,139,34,0.1) 0%, rgba(50,205,50,0.08) 100%), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="leaves" width="120" height="120" patternUnits="userSpaceOnUse"><path d="M60,20 Q80,40 60,80 Q40,40 60,20" fill="%23228B22" opacity="0.08"/><path d="M20,60 Q40,80 80,60 Q40,40 20,60" fill="%2332CD32" opacity="0.06"/></pattern></defs><rect width="1000" height="1000" fill="url(%23leaves)"/><path d="M0,800 Q200,700 400,800 Q600,900 800,800 Q900,750 1000,800" stroke="%23228B22" stroke-width="4" fill="none" opacity="0.1"/></svg>'); background-size: cover; background-position: center; }
     
     .bg-certification { background: linear-gradient(135deg, rgba(0,120,212,0.1) 0%, rgba(64,224,208,0.1) 100%), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="certificates" width="150" height="150" patternUnits="userSpaceOnUse"><rect x="25" y="25" width="100" height="100" fill="none" stroke="%230078D4" stroke-width="2" opacity="0.1" rx="10"/><circle cx="75" cy="75" r="20" fill="%2340E0D0" opacity="0.08"/><path d="M65,75 L70,80 L85,65" stroke="%230078D4" stroke-width="3" fill="none" opacity="0.15"/></pattern></defs><rect width="1000" height="1000" fill="url(%23certificates)"/></svg>'); background-size: cover; background-position: center; }
+    
+    .bg-quotation { background: linear-gradient(135deg, rgba(0,120,212,0.1) 0%, rgba(64,224,208,0.1) 100%), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="business" width="200" height="200" patternUnits="userSpaceOnUse"><rect x="50" y="50" width="100" height="100" fill="none" stroke="%230078D4" stroke-width="1" opacity="0.1" rx="5"/><path d="M75,75 L100,100 L125,75" stroke="%230078D4" stroke-width="2" fill="none" opacity="0.15"/><circle cx="100" cy="100" r="8" fill="%2340E0D0" opacity="0.1"/></pattern></defs><rect width="1000" height="1000" fill="url(%23business)"/></svg>'); background-size: cover; background-position: center; }
 
     .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
 
@@ -137,6 +139,26 @@
     .checkout-btn:hover { background:#106ebe; box-shadow: 0 4px 15px rgba(0,120,212,0.3); }
     .cart-overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); z-index:1001; opacity:0; visibility:hidden; transition:.3s; }
     .cart-overlay.active { opacity:1; visibility:visible; }
+    
+    /* Quotation Form */
+    .quotation-form { max-width: 800px; margin: 0 auto; background: #fff; border-radius: 12px; box-shadow: 0 8px 40px rgba(0,0,0,0.06); padding: 3rem; border: 1px solid #f0f0f0; }
+    .form-group { margin-bottom: 2rem; }
+    .form-label { display: block; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; font-size: 1rem; }
+    .form-input, .form-select, .form-textarea { width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 6px; font-size: 1rem; transition: all 0.3s ease; background: #fff; }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { outline: none; border-color: #0078D4; box-shadow: 0 0 0 3px rgba(0,120,212,0.1); }
+    .form-textarea { min-height: 120px; resize: vertical; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .product-selection { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .product-item { background: #f8fafe; border: 2px solid #e0e0e0; border-radius: 8px; padding: 1.5rem; transition: all 0.3s ease; }
+    .product-item:hover { border-color: #0078D4; box-shadow: 0 4px 15px rgba(0,120,212,0.1); }
+    .product-item.selected { border-color: #0078D4; background: #f0f8ff; }
+    .product-checkbox { margin-right: 0.75rem; }
+    .product-name { font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
+    .product-description { color: #666666; font-size: 0.9rem; margin-bottom: 1rem; }
+    .quantity-input { width: 80px; padding: 8px; border: 1px solid #ddd; border-radius: 4px; text-align: center; }
+    .submit-btn { background: #0078D4; color: #fff; border: none; padding: 16px 32px; border-radius: 6px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; width: 100%; }
+    .submit-btn:hover { background: #106ebe; box-shadow: 0 6px 20px rgba(0,120,212,0.3); transform: translateY(-2px); }
+    .form-note { background: #f8fafe; border-left: 4px solid #0078D4; padding: 1rem; border-radius: 4px; margin-top: 1rem; font-size: 0.9rem; color: #666666; }
 
     /* Sections */
     section { padding:120px 0; position: relative; z-index: 2; }
@@ -201,10 +223,10 @@
       .cart-icon { top:20px; right:20px; width:55px; height:55px; }
       .about-grid, .stories-grid, .cert-grid { grid-template-columns:1fr; }
       section { padding:80px 0; }
-      .bg-overlay { background: rgba(255, 255, 255, 0.9); }
+      .bg-overlay { background: rgba(255, 255, 255, 0.9); }\n      .form-row { grid-template-columns:1fr; }\n      .product-selection { grid-template-columns:1fr; }\n      .quotation-form { padding:2rem; margin:0 1rem; }
     }
   </style>
-  </head>
+</head>
 <body>
   <!-- Dynamic Background -->
   <div class="dynamic-background bg-home" id="dynamicBg">
@@ -218,6 +240,7 @@
         <li><a href="#home" class="nav-link">Home</a></li>
         <li><a href="#about" class="nav-link">About</a></li>
         <li><a href="#products" class="nav-link">Products</a></li>
+        <li><a href="#quotation" class="nav-link">Bulk Quote</a></li>
         <li><a href="#success-stories" class="nav-link">Success Stories</a></li>
         <li><a href="#certification" class="nav-link">Certification</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
@@ -251,6 +274,7 @@
         <button class="tab-btn active" data-tab="honey">Bee MyLyf (Honey)</button>
         <button class="tab-btn" data-tab="cashew">CashewNuts</button>
         <button class="tab-btn" data-tab="clove">Clove</button>
+        <button class="tab-btn" data-tab="quotation">Bulk Quote</button>
       </div>
       <div class="tab-content" id="honey">
         <div class="section-header">
@@ -506,6 +530,114 @@
           </div>
         </div>
       </div>
+      <div class="tab-content hidden" id="quotation">
+        <div class="section-header">
+          <h3>Request Bulk Order Quotation</h3>
+          <p>Get competitive pricing for large quantity orders. Fill out the form below and we'll provide you with a detailed quotation within 24 hours.</p>
+        </div>
+        <div class="quotation-form">
+          <form id="quotationForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="companyName">Company Name *</label>
+                <input type="text" id="companyName" name="companyName" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="contactPerson">Contact Person *</label>
+                <input type="text" id="contactPerson" name="contactPerson" class="form-input" required>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="email">Email Address *</label>
+                <input type="email" id="email" name="email" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" class="form-input" required>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="country">Country *</label>
+                <input type="text" id="country" name="country" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="businessType">Business Type *</label>
+                <select id="businessType" name="businessType" class="form-select" required>
+                  <option value="">Select Business Type</option>
+                  <option value="retailer">Retailer</option>
+                  <option value="wholesaler">Wholesaler</option>
+                  <option value="distributor">Distributor</option>
+                  <option value="manufacturer">Manufacturer</option>
+                  <option value="restaurant">Restaurant/Food Service</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Products of Interest *</label>
+              <div class="product-selection">
+                <div class="product-item" data-product="honey">
+                  <input type="checkbox" class="product-checkbox" id="honey-check" name="products" value="honey">
+                  <label for="honey-check">
+                    <div class="product-name">Bee MyLyf Honey Collection</div>
+                    <div class="product-description">Premium African honey products</div>
+                    <input type="number" class="quantity-input" placeholder="Qty" min="1" name="honey-qty">
+                  </label>
+                </div>
+                <div class="product-item" data-product="cashew">
+                  <input type="checkbox" class="product-checkbox" id="cashew-check" name="products" value="cashew">
+                  <label for="cashew-check">
+                    <div class="product-name">Premium Cashew Collection</div>
+                    <div class="product-description">High-quality cashew nuts and products</div>
+                    <input type="number" class="quantity-input" placeholder="Qty" min="1" name="cashew-qty">
+                  </label>
+                </div>
+                <div class="product-item" data-product="clove">
+                  <input type="checkbox" class="product-checkbox" id="clove-check" name="products" value="clove">
+                  <label for="clove-check">
+                    <div class="product-name">Premium Clove Collection</div>
+                    <div class="product-description">Aromatic clove spices and extracts</div>
+                    <input type="number" class="quantity-input" placeholder="Qty" min="1" name="clove-qty">
+                  </label>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" for="orderVolume">Expected Monthly Volume</label>
+              <select id="orderVolume" name="orderVolume" class="form-select">
+                <option value="">Select Volume Range</option>
+                <option value="100-500kg">100-500 kg</option>
+                <option value="500-1000kg">500-1,000 kg</option>
+                <option value="1000-5000kg">1,000-5,000 kg</option>
+                <option value="5000-10000kg">5,000-10,000 kg</option>
+                <option value="10000+kg">10,000+ kg</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" for="deliveryRequirements">Delivery Requirements</label>
+              <textarea id="deliveryRequirements" name="deliveryRequirements" class="form-textarea" placeholder="Please specify delivery timeline, packaging requirements, or any special instructions..."></textarea>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" for="additionalInfo">Additional Information</label>
+              <textarea id="additionalInfo" name="additionalInfo" class="form-textarea" placeholder="Any other requirements or questions..."></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">Request Quotation</button>
+            
+            <div class="form-note">
+              <strong>Note:</strong> All fields marked with * are required. We'll review your request and provide a detailed quotation within 24 hours. For urgent requests, please call us directly.
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -688,6 +820,7 @@
     <p>
       <a href="#about">About</a> | 
       <a href="#products">Products</a> | 
+      <a href="#quotation">Bulk Quote</a> | 
       <a href="#success-stories">Success Stories</a> | 
       <a href="#certification">Certification</a> | 
       <a href="#contact">Contact</a>
@@ -734,6 +867,7 @@
       'honey': 'bg-honey',
       'cashew': 'bg-cashew',
       'clove': 'bg-clove',
+      'quotation': 'bg-quotation',
       'success-stories': 'bg-success',
       'certification': 'bg-certification'
     };
@@ -785,6 +919,48 @@
     
     // Initial background set
     handleScroll();
+
+    // Quotation Form Functionality
+    document.getElementById('quotationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(this);
+      const selectedProducts = [];
+      
+      // Get selected products and quantities
+      document.querySelectorAll('input[name="products"]:checked').forEach(checkbox => {
+        const product = checkbox.value;
+        const qtyInput = document.querySelector(`input[name="${product}-qty"]`);
+        const quantity = qtyInput ? qtyInput.value : '1';
+        selectedProducts.push({ product, quantity });
+      });
+      
+      if (selectedProducts.length === 0) {
+        alert('Please select at least one product for quotation.');
+        return;
+      }
+      
+      // Show success message
+      alert(`Thank you for your quotation request!\n\nSelected Products: ${selectedProducts.map(p => `${p.product} (${p.quantity} units)`).join(', ')}\n\nWe'll review your request and provide a detailed quotation within 24 hours.`);
+      
+      // Reset form
+      this.reset();
+      document.querySelectorAll('.product-item').forEach(item => {
+        item.classList.remove('selected');
+      });
+    });
+    
+    // Product selection visual feedback
+    document.querySelectorAll('.product-checkbox').forEach(checkbox => {
+      checkbox.addEventListener('change', function() {
+        const productItem = this.closest('.product-item');
+        if (this.checked) {
+          productItem.classList.add('selected');
+        } else {
+          productItem.classList.remove('selected');
+        }
+      });
+    });
 
     // Shopping Cart Functionality
     let cart = [];
