@@ -160,6 +160,16 @@
     .submit-btn:hover { background: #106ebe; box-shadow: 0 6px 20px rgba(0,120,212,0.3); transform: translateY(-2px); }
     .form-note { background: #f8fafe; border-left: 4px solid #0078D4; padding: 1rem; border-radius: 4px; margin-top: 1rem; font-size: 0.9rem; color: #666666; }
 
+    /* Contact Section */
+    .contact-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:2rem; margin-top:3rem; }
+    .contact-card { background:#fff; padding:2rem; border-radius:12px; border:1px solid #f0f0f0; box-shadow:0 8px 40px rgba(0,0,0,0.06); transition: all 0.3s ease; }
+    .contact-card:hover { transform: translateY(-6px); box-shadow:0 16px 50px rgba(0,0,0,0.08); }
+    .contact-icon { width:56px; height:56px; border-radius:50%; background:linear-gradient(135deg,#0078D4,#40E0D0); display:flex; align-items:center; justify-content:center; color:#fff; font-size:1.4rem; margin-bottom:1rem; }
+    .contact-title { font-weight:700; color:#1a1a1a; margin-bottom:.5rem; }
+    .contact-desc { color:#666666; margin-bottom:1rem; }
+    .contact-link { display:inline-flex; align-items:center; gap:.5rem; color:#0078D4; text-decoration:none; font-weight:600; }
+    .contact-link:hover { text-decoration:underline; }
+
     /* Sections */
     section { padding:120px 0; position: relative; z-index: 2; }
     .section-header { text-align:center; margin-bottom:4rem; max-width: 800px; margin-left: auto; margin-right: auto; }
@@ -258,6 +268,42 @@
         <div class="hero-buttons">
           <a href="#products" class="btn btn-primary">Explore Products</a>
           <a href="#purpose" class="btn btn-secondary">Our Purpose</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Get in Touch</h2>
+        <p class="section-subtitle">Reach the right team directly via email for faster responses</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-icon"><i class="fas fa-handshake"></i></div>
+          <div class="contact-title">Sales Enquiries</div>
+          <div class="contact-desc">Bulk pricing, product catalogs, distributor onboarding</div>
+          <a class="contact-link" href="mailto:sales@topbrandsuppliers.onmicrosoft.com?subject=Sales%20Enquiry%20-%20TopBrandSuppliers">
+            <i class="fas fa-envelope"></i> sales@topbrandsuppliers.onmicrosoft.com
+          </a>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon"><i class="fas fa-shopping-basket"></i></div>
+          <div class="contact-title">Procurement</div>
+          <div class="contact-desc">Supplier onboarding, certifications, quality and logistics</div>
+          <a class="contact-link" href="mailto:procurement@topbrandsuppliers.onmicrosoft.com?subject=Procurement%20-%20Supplier%20Onboarding">
+            <i class="fas fa-envelope"></i> procurement@topbrandsuppliers.onmicrosoft.com
+          </a>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon"><i class="fas fa-users"></i></div>
+          <div class="contact-title">Partnerships</div>
+          <div class="contact-desc">NGOs, community programs, co-branding and strategic alliances</div>
+          <a class="contact-link" href="mailto:partners@topbrandsuppliers.onmicrosoft.com?subject=Partnership%20Interest">
+            <i class="fas fa-envelope"></i> partners@topbrandsuppliers.onmicrosoft.com
+          </a>
         </div>
       </div>
     </div>
@@ -722,40 +768,8 @@
         <h2 class="section-title">Success Stories</h2>
         <p class="section-subtitle">Transforming communities through sustainable partnerships</p>
       </div>
-      <div class="stories-grid">
-        <div class="story-card">
-          <div class="story-image"></div>
-          <div class="story-content">
-            <h3 class="story-title">Amara Honey Cooperative</h3>
-            <p class="story-location"><i class="fas fa-map-marker-alt"></i> Northern Ghana</p>
-            <p class="story-text">What started as a small group of 12 beekeepers has grown into a thriving cooperative of 150 members. Through our partnership, they've increased their income by 300% and built a modern processing facility.</p>
-            <div class="story-impact">
-              <strong>Impact:</strong> 150 families lifted out of poverty, 500 hectares of forest preserved through sustainable beekeeping practices.
-            </div>
-          </div>
-        </div>
-        <div class="story-card">
-          <div class="story-image"></div>
-          <div class="story-content">
-            <h3 class="story-title">Cashew Farmers Alliance</h3>
-            <p class="story-location"><i class="fas fa-map-marker-alt"></i> Ivory Coast</p>
-            <p class="story-text">Our partnership with local cashew farmers has revolutionized their operations. We provided training, equipment, and guaranteed purchase agreements, transforming their livelihoods.</p>
-            <div class="story-impact">
-              <strong>Impact:</strong> 200% increase in farmer income, 80 new jobs created, organic certification achieved for 1,000 hectares.
-            </div>
-          </div>
-        </div>
-        <div class="story-card">
-          <div class="story-image"></div>
-          <div class="story-content">
-            <h3 class="story-title">Spice Growers Collective</h3>
-            <p class="story-location"><i class="fas fa-map-marker-alt"></i> Zanzibar, Tanzania</p>
-            <p class="story-text">Traditional clove and spice farmers now have direct access to international markets. Our quality standards and fair pricing have enabled them to invest in better farming techniques and community development.</p>
-            <div class="story-impact">
-              <strong>Impact:</strong> 3 schools built, 250 children educated, sustainable farming practices adopted across 2,000 hectares.
-            </div>
-          </div>
-        </div>
+      <div style="text-align:center; padding: 3rem 1rem;">
+        <span style="display:inline-block; background:#f8fafe; border:1px dashed #cbd6e2; color:#66788a; padding:1rem 1.5rem; border-radius:8px; font-weight:600;">Coming soon</span>
       </div>
     </div>
   </section>
@@ -824,6 +838,11 @@
       <a href="#success-stories">Success Stories</a> | 
       <a href="#certification">Certification</a> | 
       <a href="#contact">Contact</a>
+    </p>
+    <p style="margin-top:1rem;">
+      <a href="mailto:sales@topbrandsuppliers.onmicrosoft.com">sales@topbrandsuppliers.onmicrosoft.com</a> | 
+      <a href="mailto:procurement@topbrandsuppliers.onmicrosoft.com">procurement@topbrandsuppliers.onmicrosoft.com</a> | 
+      <a href="mailto:partners@topbrandsuppliers.onmicrosoft.com">partners@topbrandsuppliers.onmicrosoft.com</a>
     </p>
   </footer>
 
